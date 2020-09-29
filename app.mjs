@@ -2,6 +2,7 @@ import fs from "fs"
 import path from "path"
 import querystring from "querystring"
 import url from "url"
+import { routesUser } from "./src/routes/users.mjs"
 
 const app = (req, res) => {
     const { query } = url.parse(req.url)
@@ -12,7 +13,7 @@ const app = (req, res) => {
     // console.log(result) // coś innego ale nie przydatne 
 
     const extension = path.extname(req.url)
-    console.log(pathname)
+    console.log("app.mjs: " + pathname)
 
     switch (req.method) {
         case "GET":
@@ -31,8 +32,24 @@ const app = (req, res) => {
                 })
 
             }
+            else if (pathname == "/getData") {
+                fs.readFile(path.join(".", "src", "public", "showData.html"), (err, file) => {
+                    res.writeHead(200, { "Content-Type": "text/html" })
+                    res.write(file)
+                    res.end()
+                })
+            } else if (pathname == "/createUser") {
+                fs.readFile(path.join(".", "src", "public", "createForm.html"), (err, file) => {
+                    res.writeHead(200, { "Content-Type": "text/html" })
+                    res.write(file)
+                    res.end()
+                })
+            }
+            else if (pathname == "/users") {
+                routesUser(req, res)
+            }
             break
-
+        // 
     }
 }
 

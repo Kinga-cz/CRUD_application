@@ -2,6 +2,8 @@ import fs from "fs"
 import path from "path"
 import querystring from "querystring"
 import url from "url"
+import { getAll } from "../controllers/getAll.mjs"
+import { addUser } from "../controllers/add.mjs"
 
 const routesUser = (req, res) => {
     const { query } = url.parse(req.url)
@@ -16,9 +18,17 @@ const routesUser = (req, res) => {
     switch (req.method) {
         case "GET":
 
-            if (pathname == "/one") {
-                res.writeHead(200, { "Content-Type": "text/html" })
-                res.write("brawo")
+            if (pathname == "/all") {
+                getAll(req, res)
+            } else if (pathname == "/one") {
+                res.writeHead(200, { "Content-Type": "text/html" }) //zrób kontroler
+                res.write("one")
+                res.end()
+            } else if (pathname == "/add") {
+                addUser(req, res)
+            } else if (pathname == "/remove") {
+                res.writeHead(200, { "Content-Type": "text/html" }) //zrob kontroler
+                res.write("remove")
                 res.end()
             }
             break

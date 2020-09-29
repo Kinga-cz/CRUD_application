@@ -1,4 +1,4 @@
-button {
+label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -10,4 +10,18 @@ a {
 
 a:hover {
     color: rgba(0, 0, 0, 0.719);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    max-width: 300px;
+    margin: 5px 0 5px 0;
+}
+
+input:last-child {
+    max-width: 100px;
 }
