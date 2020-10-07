@@ -15,42 +15,39 @@ const app = (req, res) => {
     const extension = path.extname(req.url)
     console.log("app.mjs: " + pathname)
 
-    switch (req.method) {
-        case "GET":
-            if (pathname == "/") {
-                fs.readFile(path.join(".", "src", "public", "index.html"), (err, file) => {
-                    res.writeHead(200, { "Content-Type": "text/html" })
-                    res.write(file)
-                    res.end()
-                })
-            }
-            else if (extension == ".css") {
-                fs.readFile(path.join(".", "src", "public", pathname), (err, file) => {
-                    res.writeHead(200, { "Content-Type": "text/css" })
-                    res.write(file)
-                    res.end()
-                })
-
-            }
-            else if (pathname == "/getData") {
-                fs.readFile(path.join(".", "src", "public", "showData.html"), (err, file) => {
-                    res.writeHead(200, { "Content-Type": "text/html" })
-                    res.write(file)
-                    res.end()
-                })
-            } else if (pathname == "/createUser") {
-                fs.readFile(path.join(".", "src", "public", "createForm.html"), (err, file) => {
-                    res.writeHead(200, { "Content-Type": "text/html" })
-                    res.write(file)
-                    res.end()
-                })
-            }
-            else if (pathname == "/users") {
-                routesUser(req, res)
-            }
-            break
-        // 
+    if (pathname == "/") {
+        fs.readFile(path.join(".", "src", "public", "index.html"), (err, file) => {
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.write(file)
+            res.end()
+        })
     }
+    else if (extension == ".css") {
+        fs.readFile(path.join(".", "src", "public", pathname), (err, file) => {
+            res.writeHead(200, { "Content-Type": "text/css" })
+            res.write(file)
+            res.end()
+        })
+
+    }
+    else if (pathname == "/getData") {
+        fs.readFile(path.join(".", "src", "public", "showData.html"), (err, file) => {
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.write(file)
+            res.end()
+        })
+    } else if (pathname == "/createUser") {
+        fs.readFile(path.join(".", "src", "public", "createForm.html"), (err, file) => {
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.write(file)
+            res.end()
+        })
+    }
+    else if (pathname == "/users") {
+        routesUser(req, res)
+    }
+
+
 }
 
 export default app

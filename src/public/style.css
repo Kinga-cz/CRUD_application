@@ -12,7 +12,7 @@ a:hover {
     color: rgba(0, 0, 0, 0.719);
 }
 
-form {
+div {
     display: flex;
     flex-direction: column;
 }
@@ -22,6 +22,6 @@ input {
     margin: 5px 0 5px 0;
 }
 
-input:last-child {
+button {
     max-width: 100px;
 }
