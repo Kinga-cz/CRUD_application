@@ -46,14 +46,13 @@ const addUser = (req, res) => {
         if (!isEmpty(ob)) {
             arrayData.push(ob)
             console.log(arrayData)
-            res.writeHead(302, { 'location': '/' })
+            res.writeHead(302, { 'location': '/' }) // po dodaniu fetch to nie działa , czemu? 
             res.end()
         }
-        // else {
-        //     res.statusCode = 422
-        //     res.write("error 422") // to dodasz w promisie??
-        //     res.end()
-        // }
+        else {
+            res.statusCode = 422 // po dodaniu fetch to nie działa, czemu? 
+            res.end()
+        }
     });
 
 
