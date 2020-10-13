@@ -23,7 +23,6 @@ function throwErr(type) {
 
 
 const addUser = (req, res) => {
-
     var body = '';
 
     req.on('data', function (data) {
@@ -31,6 +30,7 @@ const addUser = (req, res) => {
     });
 
     req.on('end', function () {
+        console.log(body)
         var parsedBody = JSON.parse(body)
         console.log("parsed: " + parsedBody)
         var ob = {
@@ -46,11 +46,11 @@ const addUser = (req, res) => {
         if (!isEmpty(ob)) {
             arrayData.push(ob)
             console.log(arrayData)
-            res.writeHead(302, { 'location': '/' }) // po dodaniu fetch to nie działa , czemu? 
+            res.writeHead(302, { 'location': '/' }) // po dodaniu fetch to nie działa , czemu? Rozwiązany problem po stronie aplikacji
             res.end()
         }
         else {
-            res.statusCode = 422 // po dodaniu fetch to nie działa, czemu? 
+            res.statusCode = 422
             res.end()
         }
     });

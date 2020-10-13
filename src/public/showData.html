@@ -4,11 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleTable.css">
     <title>Document</title>
 </head>
 
 <body>
     <!-- Dwa inputy: pokaż wszystkich userów i pokaż jednego usera plus tabelka z przyciskiem "delete" i "edit" -->
+    <button id="getAll">Get all</button>
+    <button id="getOne">Get one</button>
+    <label for="id">id of user</label>
+    <input type="number" name="id" id="id">
+    <a href="/">Main page</a>
+    <table id="tableUsers">
+        <thead class="unvisible">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>surname</th>
+                <th>age</th>
+                <th>email</th>
+                <th>phoneNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // reload after delete - obsługa przycisku [1]"delete" i [2]"edit"
+        // The location.reload() method reloads the current web page.
+        // The method gives the exact same result as pressing the RELOAD button in your browser.
+        // The JavaScript reload page method loads the page from the cache by default. 
+        // If the forceGet property is set to true, the page is reloaded from the server.
+        // The JS reload page method does not have a return value.
+
+        var button = document.getElementById("getAll")
+        button.addEventListener("click", () => {
+            fetch('http://127.0.0.1:3000/users/all', {
+                method: 'GET'
+            })
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    var thead = document.getElementsByTagName("thead")[0]
+                    var tbody = document.querySelector("#tableUsers>tbody")
+                    tbody.innerHTML = ""
+
+                    if (thead.classList.contains('unvisible')) {
+                        thead.classList.remove("unvisible")
+                    }
+
+                    for (const user of data.arrayData) {
+                        console.log(user)
+                        var tr = document.createElement("tr")
+                        tbody.appendChild(tr)
+                        for (const key in user) {
+                            var td = document.createElement("td")
+                            td.innerHTML = user[key]
+                            tr.appendChild(td)
+                        }
+                        var td1 = document.createElement("td")
+                        var td2 = document.createElement("td")
+                        var buttonD = document.createElement("button")
+                        var buttonE = document.createElement("button")
+                        buttonD.setAttribute("class", "deleteButton")
+                        buttonE.setAttribute("class", "editButton")
+
+                        buttonD.innerHTML = "Delete"
+                        buttonE.innerHTML = "Edit"
+                        td1.appendChild(buttonD)
+                        td2.appendChild(buttonE)
+                        tr.appendChild(td1)
+                        tr.appendChild(td2)
+                    }
+                })
+                .catch(e => { console.log("error: " + e) })
+        })
+    </script>
 </body>
 
 </html>

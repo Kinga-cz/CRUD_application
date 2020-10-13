@@ -1,0 +1,13 @@
+label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+
+a:hover {
+    color: rgba(0, 0, 0, 0.719);
+}
