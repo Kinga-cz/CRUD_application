@@ -23,8 +23,6 @@ const routesUser = (req, res) => {
                 getAll(req, res)
             } else if (pathname == "/one") {
                 getOne(req, res)
-            } else if (pathname == "/remove") {
-                removeUser(req, res)
             }
             break
         case "POST":
@@ -32,6 +30,10 @@ const routesUser = (req, res) => {
                 addUser(req, res)
             }
             break
+        case "DELETE":
+            if (pathname == "/remove") {
+                removeUser(req, res)
+            }
     }
 
 }

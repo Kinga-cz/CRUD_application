@@ -37,6 +37,34 @@
         // If the forceGet property is set to true, the page is reloaded from the server.
         // The JS reload page method does not have a return value.
 
+        function deleteUser(e) {
+            var selectedButton = e.target
+            var closestElement = selectedButton.closest("tr")
+            var userID = closestElement.childNodes[0].innerHTML
+
+            fetch('http://127.0.0.1:3000/users/remove', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: userID
+                }),
+            })
+                .then(response => {
+                    console.log(response.ok)
+                    if (response.ok) {
+                        closestElement.remove()
+                    }
+                    // else {
+                    //     document.body.innerHTML = "nie można usunac" //czy tak moge ? 
+                    // }
+                })
+                .catch((error) => {
+                    console.error('Error:', error)
+                });
+        }
+
         var button = document.getElementById("getAll")
         button.addEventListener("click", () => {
             fetch('http://127.0.0.1:3000/users/all', {
@@ -72,13 +100,14 @@
 
                         buttonD.innerHTML = "Delete"
                         buttonE.innerHTML = "Edit"
+                        buttonD.addEventListener("click", function (e) { deleteUser(e) })
                         td1.appendChild(buttonD)
                         td2.appendChild(buttonE)
                         tr.appendChild(td1)
                         tr.appendChild(td2)
                     }
                 })
-                .catch(e => { console.log("error: " + e) })
+                .catch(e => { console.log("Error: " + e) })
         })
     </script>
 </body>
