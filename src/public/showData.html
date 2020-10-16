@@ -40,7 +40,7 @@
         function deleteUser(e) {
             var selectedButton = e.target
             var closestElement = selectedButton.closest("tr")
-            var userID = closestElement.childNodes[0].innerHTML
+            var userDeleteID = closestElement.childNodes[0].innerHTML
 
             fetch('http://127.0.0.1:3000/users/remove', {
                 method: 'DELETE',
@@ -48,7 +48,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: userID
+                    id: userDeleteID
                 }),
             })
                 .then(response => {
@@ -56,17 +56,14 @@
                     if (response.ok) {
                         closestElement.remove()
                     }
-                    // else {
-                    //     document.body.innerHTML = "nie można usunac" //czy tak moge ? 
-                    // }
                 })
                 .catch((error) => {
                     console.error('Error:', error)
                 });
         }
 
-        var button = document.getElementById("getAll")
-        button.addEventListener("click", () => {
+        var buttonAll = document.getElementById("getAll")
+        buttonAll.addEventListener("click", () => {
             fetch('http://127.0.0.1:3000/users/all', {
                 method: 'GET'
             })
@@ -109,6 +106,66 @@
                 })
                 .catch(e => { console.log("Error: " + e) })
         })
+
+        //obsłuż button get one
+        var buttonOne = document.getElementById("getOne")
+        var inputID = document.getElementById("id")
+        buttonOne.addEventListener("click", () => {
+            fetch('http://127.0.0.1:3000/users/one', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: inputID.value
+                }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        alert("Can not find user")
+                    }
+                    return response.json()
+
+                })
+                .then(data => {
+                    var thead = document.getElementsByTagName("thead")[0]
+                    var tbody = document.querySelector("#tableUsers>tbody")
+                    tbody.innerHTML = ""
+
+                    if (thead.classList.contains('unvisible')) {
+                        thead.classList.remove("unvisible")
+                    }
+                    console.log(data)
+
+
+                    var tr = document.createElement("tr")
+                    tbody.appendChild(tr)
+                    for (const key in data) {
+                        var td = document.createElement("td")
+                        td.innerHTML = data[key]
+                        tr.appendChild(td)
+                    }
+                    var td1 = document.createElement("td")
+                    var td2 = document.createElement("td")
+                    var buttonD = document.createElement("button")
+                    var buttonE = document.createElement("button")
+                    buttonD.setAttribute("class", "deleteButton")
+                    buttonE.setAttribute("class", "editButton")
+
+                    buttonD.innerHTML = "Delete"
+                    buttonE.innerHTML = "Edit"
+                    buttonD.addEventListener("click", function (e) { deleteUser(e) })
+                    td1.appendChild(buttonD)
+                    td2.appendChild(buttonE)
+                    tr.appendChild(td1)
+                    tr.appendChild(td2) //sprawdz to ;)
+
+                })
+                .catch((error) => {
+                    console.error('Error:', error)
+                });
+        })
+
     </script>
 </body>
 
