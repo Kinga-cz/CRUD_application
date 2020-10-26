@@ -43,6 +43,13 @@ const app = (req, res) => {
             res.end()
         })
     }
+    else if (pathname == "/edit_user") {
+        fs.readFile(path.join(".", "src", "public", "editData.html"), (err, file) => {
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.write(file)
+            res.end()
+        })
+    }
     else if (pathname == "/users") {
         routesUser(req, res)
     }

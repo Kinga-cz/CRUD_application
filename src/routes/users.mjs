@@ -6,6 +6,7 @@ import { getAll } from "../controllers/getAll.mjs"
 import { getOne } from "../controllers/getOne.mjs"
 import { addUser } from "../controllers/add.mjs"
 import { removeUser } from "../controllers/remove.mjs"
+import { updateUser } from "../controllers/update.mjs"
 
 
 /// obłsuga błędów na serwerze (try catch) do zrobienia, responsywność strony, lepszy design, zmiana kodu na nowsze podejście, jquery, mongoose - baza dancych
@@ -24,6 +25,7 @@ const routesUser = (req, res) => {
             if (pathname == "/all") {
                 getAll(req, res)
             }
+
             break
         case "POST":
             if (pathname == "/add") {
@@ -36,6 +38,10 @@ const routesUser = (req, res) => {
         case "DELETE":
             if (pathname == "/remove") {
                 removeUser(req, res)
+            }
+        case "PUT":
+            if (pathname == "/update") {
+                updateUser(req, res)
             }
     }
 
