@@ -43,7 +43,7 @@
             var closestElement = selectedButton.closest("tr")
             var userDeleteID = closestElement.childNodes[0].innerHTML
 
-            fetch('http://127.0.0.1:3000/users/remove', {
+            fetch('/users/remove', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +65,7 @@
 
         var buttonAll = document.getElementById("getAll")
         buttonAll.addEventListener("click", () => {
-            fetch('http://127.0.0.1:3000/users/all', {
+            fetch('/users/all', {
                 method: 'GET'
             })
                 .then(res => {
@@ -112,7 +112,7 @@
         var buttonOne = document.getElementById("getOne")
         var inputID = document.getElementById("id")
         buttonOne.addEventListener("click", () => {
-            fetch('http://127.0.0.1:3000/users/one', {
+            fetch('/users/one', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

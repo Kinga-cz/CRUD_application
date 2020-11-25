@@ -1,5 +1,4 @@
 #ignore pdf and docx files
 *.pdf
 *.docx
-#ignore package.json file
-*.json
+
