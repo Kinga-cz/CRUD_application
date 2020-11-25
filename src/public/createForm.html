@@ -46,7 +46,7 @@
         var inputNumber = document.getElementById("phoneNumber")
         var button = document.querySelector("button")
         button.addEventListener("click", () => {
-            fetch('http://127.0.0.1:3000/users/add', {
+            fetch('/users/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

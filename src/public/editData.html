@@ -40,7 +40,7 @@
             }
         })
 
-        fetch('http://127.0.0.1:3000/users/all', {
+        fetch('/users/all', {
             method: 'GET'
         })
             .then(res => {
@@ -71,7 +71,7 @@
             .catch(e => { console.log("Error: " + e) })
 
         confirmButton.addEventListener("click", function () {
-            fetch('http://127.0.0.1:3000/users/update', {
+            fetch('/users/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

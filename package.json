@@ -1,0 +1,12 @@
+{
+  "name": "crud_application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "author": "Kinga Czoków",
+  "license": "ISC",
+  "type": "module"
+}
